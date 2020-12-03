@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/sls-course-frontend/static/css/main.028e3cb6.chunk.css",
-    "main.js": "/sls-course-frontend/static/js/main.a6769783.chunk.js",
-    "main.js.map": "/sls-course-frontend/static/js/main.a6769783.chunk.js.map",
+    "main.js": "/sls-course-frontend/static/js/main.735115d9.chunk.js",
+    "main.js.map": "/sls-course-frontend/static/js/main.735115d9.chunk.js.map",
     "runtime-main.js": "/sls-course-frontend/static/js/runtime-main.1e92cc17.js",
     "runtime-main.js.map": "/sls-course-frontend/static/js/runtime-main.1e92cc17.js.map",
     "static/js/2.95cc098b.chunk.js": "/sls-course-frontend/static/js/2.95cc098b.chunk.js",
     "static/js/2.95cc098b.chunk.js.map": "/sls-course-frontend/static/js/2.95cc098b.chunk.js.map",
     "index.html": "/sls-course-frontend/index.html",
-    "precache-manifest.1b5a4e7b7e73bc0879cf958a62eff0f4.js": "/sls-course-frontend/precache-manifest.1b5a4e7b7e73bc0879cf958a62eff0f4.js",
+    "precache-manifest.af7e51d2e984b9a29c15a6cbd3bb98b1.js": "/sls-course-frontend/precache-manifest.af7e51d2e984b9a29c15a6cbd3bb98b1.js",
     "service-worker.js": "/sls-course-frontend/service-worker.js",
     "static/css/main.028e3cb6.chunk.css.map": "/sls-course-frontend/static/css/main.028e3cb6.chunk.css.map",
     "static/js/2.95cc098b.chunk.js.LICENSE.txt": "/sls-course-frontend/static/js/2.95cc098b.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.1e92cc17.js",
     "static/js/2.95cc098b.chunk.js",
     "static/css/main.028e3cb6.chunk.css",
-    "static/js/main.a6769783.chunk.js"
+    "static/js/main.735115d9.chunk.js"
   ]
 }
