@@ -2,22 +2,22 @@ import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import Auction from "../components/Auction";
 import BidModal from "../components/BidModal";
-import { Fab, makeStyles } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
+import { Fab, makeStyles } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 
 const containerWidth = 1000;
 const cardPadding = 14;
-const cardWidth = (containerWidth / 2) - (cardPadding * 2); 
+const cardWidth = containerWidth / 2 - cardPadding * 2;
 
 const useStyles = makeStyles({
   auctionsContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: "flex",
+    flexWrap: "wrap",
     maxWidth: containerWidth,
-    margin: 'auto',
-    '@media (max-width: 900px)' : {
-      alignItems: 'center',
-      justifyContent: 'center'
+    margin: "auto",
+    "@media (max-width: 900px)": {
+      alignItems: "center",
+      justifyContent: "center",
     },
   },
   auctionCard: {
@@ -26,12 +26,12 @@ const useStyles = makeStyles({
     padding: cardPadding,
   },
   fabContainer: {
-    position: 'fixed',
+    position: "fixed",
     bottom: 20,
     right: 20,
   },
   createAuctionButton: {
-    background: 'linear-gradient(90deg, rgba(190,52,32,1) 0%, rgba(231,75,77,1) 48%, rgba(231,148,74,1) 100%)',
+    background: "#075991",
   },
 });
 
@@ -43,7 +43,10 @@ const AuctionsPage = (props) => {
     (async () => {
       await auctionStore.fetchAuctions();
       setInterval(() => {
-        if (routerHistory.location.pathname === '/auctions' || routerHistory.location.pathname === '/') {
+        if (
+          routerHistory.location.pathname === "/auctions" ||
+          routerHistory.location.pathname === "/"
+        ) {
           auctionStore.fetchAuctions();
         }
       }, process.env.REACT_APP_REFRESH_RATE);
@@ -55,21 +58,21 @@ const AuctionsPage = (props) => {
 
     if (!auctions.length) {
       return (
-        <div style={{ textAlign: 'center', width: '100%' }}>
+        <div style={{ textAlign: "center", width: "100%" }}>
           <h4>No auctions available. Create one?</h4>
         </div>
       );
     }
 
     return auctions.map((auction) => {
-      let bidState = 'CAN_BID';
+      let bidState = "CAN_BID";
 
       if (auction.seller === authStore.email) {
-        bidState = 'OWN_AUCTION';
+        bidState = "OWN_AUCTION";
       }
 
       if (auction.highestBid.bidder === authStore.email) {
-        bidState = 'HIGHEST_BIDDER';
+        bidState = "HIGHEST_BIDDER";
       }
 
       return (
@@ -89,13 +92,13 @@ const AuctionsPage = (props) => {
       <BidModal />
 
       {renderAuctions()}
-      
+
       <div className={classes.fabContainer}>
         <Fab
           color="primary"
           aria-label="add"
           className={classes.createAuctionButton}
-          onClick={() => routerHistory.push('/create')}
+          onClick={() => routerHistory.push("/create")}
         >
           <AddIcon />
         </Fab>
@@ -104,4 +107,8 @@ const AuctionsPage = (props) => {
   );
 };
 
-export default inject("auctionStore", "authStore", "routerHistory")(observer(AuctionsPage));
+export default inject(
+  "auctionStore",
+  "authStore",
+  "routerHistory"
+)(observer(AuctionsPage));

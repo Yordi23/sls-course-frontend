@@ -1,7 +1,7 @@
-import { action, observable } from 'mobx';
-import Axios from 'axios';
-import AuthStore from './AuthStore';
-import OverlayStore from './OverlayStore';
+import { action, observable } from "mobx";
+import Axios from "axios";
+import AuthStore from "./AuthStore";
+import OverlayStore from "./OverlayStore";
 
 const axios = Axios.create({
   baseURL: process.env.REACT_APP_AUCTIONS_ENDPOINT,
@@ -15,20 +15,20 @@ class AuctionStore {
   @action
   async fetchAuctions() {
     try {
-      const result = await axios.get('/auctions?status=OPEN', {
+      const result = await axios.get("/auctions?status=OPEN", {
         headers: {
           Authorization: AuthStore.token,
-        }
+        },
       });
 
       this.auctions = result.data;
     } catch (error) {
-      alert('Could not fetch auctions! Check console for more details.');
+      alert("Could not fetch auctions! Check console for more details.");
       console.error(error);
     }
 
     if (this.biddingOn) {
-      this.auctions.forEach(auction => {
+      this.auctions.forEach((auction) => {
         if (auction.id === this.biddingOn.id) {
           this.bidAmount = auction.highestBid.amount + 1;
         }
@@ -60,13 +60,17 @@ class AuctionStore {
     OverlayStore.setLoadingSpinner(true);
 
     try {
-      await axios.patch(`/auction/${id}/bid`, { amount }, {
-        headers: {
-          Authorization: AuthStore.token,
+      await axios.patch(
+        `/auctions/${id}/bid`,
+        { amount },
+        {
+          headers: {
+            Authorization: AuthStore.token,
+          },
         }
-      });
+      );
     } catch (error) {
-      alert('Could not place bid! Check console for more details.');
+      alert("Could not place bid! Check console for more details.");
       console.error(error);
     }
 
@@ -81,22 +85,28 @@ class AuctionStore {
     OverlayStore.setLoadingSpinner(true);
 
     try {
-      const createAuctionResult = await axios.post('/auction', { title }, {
-        headers: {
-          Authorization: AuthStore.token,
+      const createAuctionResult = await axios.post(
+        "/auctions",
+        { title },
+        {
+          headers: {
+            Authorization: AuthStore.token,
+          },
         }
-      });
-      
+      );
+
+      console.log("Created auction:", createAuctionResult);
+
       const auction = createAuctionResult.data;
       auctionId = auction.id;
-      
-      await axios.patch(`/auction/${auctionId}/picture`, pictureBase64, {
+
+      await axios.patch(`/auctions/${auctionId}/picture`, pictureBase64, {
         headers: {
           Authorization: AuthStore.token,
         },
       });
     } catch (error) {
-      alert('Could not create auction! Check console for more details.');
+      alert("Could not create auction! Check console for more details.");
       console.error(error);
     }
 
